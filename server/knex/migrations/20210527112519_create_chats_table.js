@@ -1,6 +1,6 @@
 'use strict';
 exports.up = function (knex, Promise) {
-    return knex.schema.createTable('transactions', function (table) {
+    return knex.schema.createTable('chats', function (table) {
         table.increments('id').primary();
         table
             .integer('user_id')
@@ -9,12 +9,12 @@ exports.up = function (knex, Promise) {
             .inTable('users')
             .onUpdate('cascade')
             .onDelete('cascade');
-        table.decimal('card_points', 10, 2).notNullable();
-        table.string('type').notNullable();
+        table.string('text').notNullable();
+        table.timestamp('created_at').defaultTo(knex.fn.now());
         table.timestamp('updated_at').defaultTo(knex.fn.now());
     });
 };
 
 exports.down = function (knex, Promise) {
-    return knex.schema.dropTable('transactions');
+    return knex.schema.dropTable('chats');
 };
