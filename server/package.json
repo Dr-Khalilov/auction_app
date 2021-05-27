@@ -8,5 +8,14 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "bookshelf": "^1.2.0",
+    "knex": "^0.21.19",
+    "pg": "^8.6.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7",
+    "prettier-standard": "^15.0.1"
+  }
 }
