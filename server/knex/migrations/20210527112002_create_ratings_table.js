@@ -1,13 +1,13 @@
 'use strict';
-exports.up = function (knex, Promise) {
-    return knex.schema.createTable('ratings', function (table) {
+exports.up = async function (knex, Promise) {
+    return await knex.schema.createTable('ratings', function (table) {
         table.increments('id').primary();
         table
             .integer('user_id')
             .unsigned()
+            .nullable()
             .references('id')
             .inTable('users')
-            .nullable()
             .onUpdate('cascade')
             .onDelete('SET NULL');
         table.decimal('point', 10, 2).notNullable();
@@ -15,6 +15,6 @@ exports.up = function (knex, Promise) {
     });
 };
 
-exports.down = function (knex) {
-    return knex.schema.dropTable('ratings');
+exports.down = async function (knex) {
+    return await knex.schema.dropTable('ratings');
 };

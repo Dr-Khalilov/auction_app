@@ -5,17 +5,9 @@ exports.up = async function (knex, Promise) {
         table
             .integer('user_id')
             .unsigned()
+            .nullable()
             .references('id')
             .inTable('users')
-            .nullable()
-            .onUpdate('cascade')
-            .onDelete('SET NULL');
-        table
-            .integer('auction_item_id')
-            .unsigned()
-            .references('id')
-            .inTable('auction_items')
-            .nullable()
             .onUpdate('cascade')
             .onDelete('SET NULL');
         table.decimal('amount', 10, 2).notNullable();
@@ -23,6 +15,6 @@ exports.up = async function (knex, Promise) {
     });
 };
 
-exports.down = function (knex, Promise) {
-    return knex.schema.dropTable('bids');
+exports.down = async function (knex, Promise) {
+    return await knex.schema.dropTable('bids');
 };

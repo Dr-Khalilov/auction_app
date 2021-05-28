@@ -1,13 +1,13 @@
 'use strict';
-exports.up = function (knex, Promise) {
-    return knex.schema.createTable('transactions', function (table) {
+exports.up = async function (knex, Promise) {
+    return await knex.schema.createTable('transactions', function (table) {
         table.increments('id').primary();
         table
             .integer('user_id')
             .unsigned()
+            .nullable()
             .references('id')
             .inTable('users')
-            .nullable()
             .onUpdate('cascade')
             .onDelete('SET NULL');
         table.decimal('card_points', 10, 2).notNullable();
@@ -16,6 +16,6 @@ exports.up = function (knex, Promise) {
     });
 };
 
-exports.down = function (knex, Promise) {
-    return knex.schema.dropTable('transactions');
+exports.down = async function (knex, Promise) {
+    return await knex.schema.dropTable('transactions');
 };

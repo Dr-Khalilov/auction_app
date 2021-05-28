@@ -1,14 +1,16 @@
-exports.up = function (knex, Promise) {
-    return knex.schema.alterTable('auction_items', function (table) {
+exports.up = async function (knex, Promise) {
+    return await knex.schema.alterTable('bids', function (table) {
         table
-            .integer('bid_won_id')
+            .integer('auction_item_id')
             .unsigned()
-            .references('id')
-            .inTable('bids')
             .nullable()
+            .references('id')
+            .inTable('auction_items')
             .onUpdate('cascade')
             .onDelete('SET NULL');
     });
 };
 
-exports.down = function (knex, Promise) {};
+exports.down = async function (knex, Promise) {
+    return await knex.schema.dropTable('bids');
+};
