@@ -1,6 +1,6 @@
 'use strict';
 const faker = require('faker');
-const getRandomIntInclusive = require('../utils');
+const { getRandomIntInclusive } = require('../utils');
 
 exports.seed = async function (knex) {
     try {

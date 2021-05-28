@@ -7,15 +7,17 @@ exports.up = async function (knex, Promise) {
             .unsigned()
             .references('id')
             .inTable('users')
+            .nullable()
             .onUpdate('cascade')
-            .onDelete('cascade');
+            .onDelete('SET NULL');
         table
             .integer('auction_item_id')
             .unsigned()
             .references('id')
             .inTable('auction_items')
+            .nullable()
             .onUpdate('cascade')
-            .onDelete('cascade');
+            .onDelete('SET NULL');
         table.decimal('amount', 10, 2).notNullable();
         table.timestamp('created_at').defaultTo(knex.fn.now());
     });

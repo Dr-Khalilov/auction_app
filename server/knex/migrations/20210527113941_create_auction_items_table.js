@@ -1,21 +1,23 @@
 'use strict';
 exports.up = function (knex, Promise) {
-   return knex.schema.createTable('auction_items', function (table) {
+    return knex.schema.createTable('auction_items', function (table) {
         table.increments('id').primary();
         table
             .integer('user_id')
             .unsigned()
             .references('id')
             .inTable('users')
+            .nullable()
             .onUpdate('cascade')
-            .onDelete('cascade');
+            .onDelete('SET NULL');
         table
             .integer('card_id')
             .unsigned()
             .references('id')
             .inTable('cards')
+            .nullable()
             .onUpdate('cascade')
-            .onDelete('cascade');
+            .onDelete('SET NULL');
         table.string('description').notNullable();
         table.datetime('start_date').notNullable();
         table.string('auction_status').notNullable();
@@ -33,4 +35,3 @@ exports.up = function (knex, Promise) {
 exports.down = function (knex, Promise) {
     return knex.schema.dropTable('auction_items');
 };
-

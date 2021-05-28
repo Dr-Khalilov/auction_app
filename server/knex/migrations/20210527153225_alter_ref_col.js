@@ -5,8 +5,9 @@ exports.up = function (knex, Promise) {
             .unsigned()
             .references('id')
             .inTable('bids')
+            .nullable()
             .onUpdate('cascade')
-            .onDelete('cascade');
+            .onDelete('SET NULL');
     });
 };
 

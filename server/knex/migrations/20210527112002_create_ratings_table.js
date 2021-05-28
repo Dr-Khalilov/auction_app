@@ -7,8 +7,9 @@ exports.up = function (knex, Promise) {
             .unsigned()
             .references('id')
             .inTable('users')
+            .nullable()
             .onUpdate('cascade')
-            .onDelete('cascade');
+            .onDelete('SET NULL');
         table.decimal('point', 10, 2).notNullable();
         table.timestamp('updated_at').defaultTo(knex.fn.now());
     });

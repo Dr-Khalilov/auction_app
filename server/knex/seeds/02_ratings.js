@@ -1,11 +1,9 @@
 'use strict';
 const faker = require('faker');
-const  getRandomIntInclusive  = require('../utils');
+const { getRandomIntInclusive } = require('../utils');
 
 exports.seed = async function (knex) {
     try {
-        
-
         const generateRating = key => ({
             user_id: getRandomIntInclusive(1, 50),
             point: getRandomIntInclusive(1, 10),

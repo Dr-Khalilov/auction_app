@@ -7,8 +7,9 @@ exports.up = function (knex, Promise) {
             .unsigned()
             .references('id')
             .inTable('users')
+            .nullable()
             .onUpdate('cascade')
-            .onDelete('cascade');
+            .onDelete('SET NULL');
         table.string('text').notNullable();
         table.timestamp('created_at').defaultTo(knex.fn.now());
         table.timestamp('updated_at').defaultTo(knex.fn.now());

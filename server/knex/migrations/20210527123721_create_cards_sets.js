@@ -6,15 +6,17 @@ exports.up = function (knex, Promise) {
             .foreign('card_id')
             .references('id')
             .inTable('cards')
+            .nullable()
             .onUpdate('cascade')
-            .onDelete('cascade');
+            .onDelete('SET NULL');
         table.integer('set_id').unsigned();
         table
             .foreign('set_id')
             .references('id')
             .inTable('set_of_cards')
+            .nullable()
             .onUpdate('cascade')
-            .onDelete('cascade');
+            .onDelete('SET NULL');
     });
 };
 
