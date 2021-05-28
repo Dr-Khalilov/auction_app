@@ -1,0 +1,10 @@
+{
+    "baseURL": "https://rickandmortyapi.com/api",
+    "get": {
+        "caracters": {
+            "results": 1,
+            "seed": "api_key",
+            "page": 1
+        }
+    }
+}

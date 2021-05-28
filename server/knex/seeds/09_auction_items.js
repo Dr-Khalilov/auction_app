@@ -9,8 +9,9 @@ exports.seed = async function (knex) {
         };
 
         const generateAuctionItem = key => ({
-            user_id: getRandomIntInclusive(1, 50),
+            user_id: getRandomIntInclusive(1, 150),
             card_id: getRandomIntInclusive(1, 10),
+            bid_won_id: getRandomIntInclusive(1, 50),
             description: faker.lorem.words(),
             start_date: faker.date.future(),
             auction_status: getRandomAuctionStatus(),
@@ -22,7 +23,6 @@ exports.seed = async function (knex) {
             min_auction_time: time.min_auction_time,
             created_at: faker.date.past(),
             updated_at: faker.date.recent(),
-            bid_won_id: getRandomIntInclusive(41, 60),
         });
         const generateAuctionItems = amount => {
             return new Array(amount)
