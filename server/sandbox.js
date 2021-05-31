@@ -17,10 +17,12 @@ const baseURL = 'https://rickandmortyapi.com/api';
 
 const getLocation = async () => {
     try {
-        const rick = await rickandmorty.getLocation();
-       
+        const rick = await rickandmorty.getLocation(
+            Array.from({ length: 108 }, (v, i) => i + 1)
+        );
+        const arr = [...rick];
 
-        console.log(rick);
+       console.log(typeof arr);
     } catch (err) {
         console.error(err);
     }

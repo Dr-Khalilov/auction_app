@@ -3,19 +3,26 @@ const rickandmorty = require('rickmortyapi');
 
 exports.seed = async function (knex) {
     try {
-        const rickEpisode = await rickandmorty.getEpisode(5);
-        const insertEpisode = () => ({
-            name: rickEpisode.name,
-            air_date: rickEpisode.air_date,
-            episode: rickEpisode.episode,
-            created_at: rickEpisode.created,
-        });
-        const insertEpisodes = amount => {
-            return new Array(amount)
-                .fill(null)
-                .map((_, i) => insertEpisode(i + 1));
+        const rickEpisodes = await rickandmorty.getEpisode(
+            Array.from({ length: 41 }, (v, i) => i + 1)
+        );
+
+        const insertAllEpisodes = () => {
+            const addEpisodes = [];
+            let episode;
+            for (let instanceEpisode of rickEpisodes) {
+                episode = {
+                    name: instanceEpisode.name,
+                    air_date: instanceEpisode.air_date,
+                    episode: instanceEpisode.episode,
+                    created_at: instanceEpisode.created,
+                };
+                addEpisodes.push(episode);
+            }
+            return addEpisodes;
         };
-        await knex('episodes').insert(insertEpisodes(1));
+
+        await knex('episodes').insert(insertAllEpisodes());
     } catch (err) {
         console.error(err);
     }

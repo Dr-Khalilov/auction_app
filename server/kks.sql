@@ -4,3 +4,4 @@ WHERE knex_migrations."name" IN (
     );
     
 DROP TABLE if EXISTS locations cascade;
+TRUNCATE TABLE cards_episodes;
