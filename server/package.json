@@ -17,7 +17,8 @@
     "faker": "^5.5.3",
     "knex": "^0.21.19",
     "pg": "^8.6.0",
-    "querystring": "^0.2.1"
+    "querystring": "^0.2.1",
+    "rickmortyapi": "^0.3.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.7",

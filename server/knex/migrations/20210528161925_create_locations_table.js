@@ -5,7 +5,7 @@ exports.up = async function (knex, Promise) {
         table.string('name', 100).notNullable();
         table.string('type').notNullable();
         table.string('dimension').notNullable();
-        table.text('residents').notNullable();
+        table.specificType('residents', 'text ARRAY').notNullable();
         table
             .timestamp('created_at')
             .defaultTo(knex.fn.now())

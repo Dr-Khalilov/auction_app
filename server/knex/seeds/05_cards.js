@@ -1,15 +1,21 @@
 'use strict';
 const faker = require('faker');
+const rickandmorty = require('rickmortyapi');
+const { getRandomIntInclusive } = require('../utils');
 
 exports.seed = async function (knex) {
     try {
-        const generateCard = key => ({
-            name: faker.name.title(),
-            episode: faker.lorem.sentence(),
-            location: faker.address.cityName(),
-            type_of_person: faker.name.gender(),
+        const rickCards = await rickandmorty.getCharacter(10);
+        const generateCard = () => ({
+            location_id: getRandomIntInclusive(1, 62),
+            name: rickCards.name,
+            species: rickCards.species,
+            type_of_person: rickCards.type,
+            gender: rickCards.gender,
             is_active: faker.datatype.boolean(),
-            created_at: faker.date.past(),
+            image_path: rickCards.image,
+            origin: rickCards.origin,
+            created_at: rickCards.created,
             updated_at: faker.date.recent(),
         });
 
@@ -18,7 +24,7 @@ exports.seed = async function (knex) {
                 .fill(null)
                 .map((_, i) => generateCard(i + 1));
         };
-        await knex('cards').insert(generateCards(10));
+        await knex('cards').insert(generateCards(1));
     } catch (err) {
         console.error(err);
     }
