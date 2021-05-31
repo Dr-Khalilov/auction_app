@@ -27,7 +27,7 @@ dist/
 .idea/
 
 # VSCode editor
-.vscode/
+**.vscode/
 
 # Unit test reports
 TEST*.xml
