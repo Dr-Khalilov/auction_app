@@ -1,4 +1,5 @@
 'use strict';
+
 exports.up = async function (knex, Promise) {
     return await knex.schema.createTable('users', function (table) {
         table.increments('id').primary();
@@ -9,7 +10,7 @@ exports.up = async function (knex, Promise) {
             .string('email', 50)
             .unique()
             .notNullable();
-        table.text('password').notNullable();
+        table.text('password_hash').notNullable();
         table
             .date('created_at')
             .notNullable()
