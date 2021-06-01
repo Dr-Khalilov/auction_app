@@ -1,5 +1,5 @@
 const createHttpError = require('http-errors');
-const JWTService = require('../services/jwtService');
+const JWTService = require('../services/jwt.service');
 
 const checkAccessToken = async (req, res, next) => {
     try {

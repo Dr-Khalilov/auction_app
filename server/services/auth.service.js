@@ -1,5 +1,5 @@
-const JWTService = require('./jwtService');
-const UserService = require('./userService');
+const JWTService = require('./jwt.service');
+const UserService = require('./user.service');
 
 const getTokenPayload = user => ({
     userId: user.id,
