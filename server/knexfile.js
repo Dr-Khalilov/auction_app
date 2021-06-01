@@ -1,5 +1,4 @@
-// Update with your config settings.
-
+'use strict';
 module.exports = {
     development: {
         client: 'pg',
@@ -22,3 +21,4 @@ module.exports = {
 
     production: {},
 };
+

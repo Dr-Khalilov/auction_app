@@ -19,7 +19,7 @@ exports.seed = async function (knex) {
 
         const generateCardSet = key => ({
             card_id: cards[key],
-            set_id: set_of_cards[getRandomIntInclusive(1, 10)],
+            set_id: set_of_cards[key],
         });
 
         const generateCardsSets = amount => {
