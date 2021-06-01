@@ -4,4 +4,4 @@ WHERE knex_migrations."name" IN (
     );
     
 DROP TABLE if EXISTS users cascade;
-TRUNCATE TABLE cards_episodes;
+TRUNCATE TABLE cards_sets;
