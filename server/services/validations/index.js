@@ -1,6 +1,6 @@
 const yup = require('yup');
 
-export const NAME_SCHEMA = yup
+const NAME_SCHEMA = yup
     .string()
     .matches(/^[A-ZА-Я][a-zа-я]{3,128}$/)
     .required();
