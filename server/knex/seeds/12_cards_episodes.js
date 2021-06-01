@@ -20,8 +20,8 @@ exports.seed = async function (knex) {
             });
 
         const generateCardEpisode = key => ({
-            card_id: cards[getRandomIntInclusive(15, 685)],
-            episode_id: episodes[getRandomIntInclusive(38, 78)],
+            card_id: cards[key],
+            episode_id: episodes[key],
         });
 
         const generateCardsEpisodes = amount => {
