@@ -1,5 +1,5 @@
-const JWTService = require('./jwt.service');
-const UserService = require('./user.service');
+const JWTService = require('./jwtService');
+const UserService = require('./userService');
 
 const getTokenPayload = user => ({
     userId: user.id,
@@ -23,4 +23,16 @@ module.exports.createSession = async user => {
             tokenPair,
         };
     }
+};
+
+module.exports.refreshSession = async refreshTokenInstance => {
+    const user = await refreshTokenInstance.getUser();
+    const tokenPair = await JWTService.createTokenPair(getTokenPayload(user));
+    await refreshTokenInstance.update({
+        value: tokenPair.refresh,
+    });
+    return {
+        user: UserService.prepareUser(user),
+        tokenPair,
+    };
 };

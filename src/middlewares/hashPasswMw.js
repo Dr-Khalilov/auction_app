@@ -1,4 +1,3 @@
-require('dotenv').config({ path: path.resolve(__dirname, '..', '..', '.env') });
 const bcrypt = require('bcryptjs');
 
 const {
