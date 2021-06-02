@@ -4,7 +4,7 @@ const {
     env: { SALT_ROUNDS },
 } = process;
 
-module.exports = async (req, res, next) => {
+module.exports.hashPassword = async (req, res, next) => {
     try {
         req.hashPassw = await bcrypt.hash(req.body.password, SALT_ROUNDS);
         next();

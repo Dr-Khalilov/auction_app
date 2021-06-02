@@ -4,8 +4,8 @@ const User = require('../models/User');
 const Role = require('../models/Role');
 const RefreshToken = require('../models/RefreshToken');
 
-module.exports.signUp = async (req, res, next) => {
-    try {
+class AuthControllers {
+    static async signUp (req, res, next) {
         const { body } = req;
         const user = await User.create(body);
         if (user) {
@@ -13,13 +13,9 @@ module.exports.signUp = async (req, res, next) => {
             return res.send({ data });
         }
         next(createHttpError(400, 'Unable to create user with provided data'));
-    } catch (err) {
-        next(err);
     }
-};
 
-module.exports.signIn = async (req, res, next) => {
-    try {
+    static async signIn (req, res, next) {
         const {
             body: { email, password },
         } = req;
@@ -29,13 +25,9 @@ module.exports.signIn = async (req, res, next) => {
             return res.send({ data });
         }
         next(createHttpError(401, 'Invalid credentials'));
-    } catch (err) {
-        next(err);
     }
-};
 
-module.exports.refreshToken = async (req, res, next) => {
-    try {
+    static async refreshToken (req, res, next) {
         const {
             body: { refreshToken },
         } = req;
@@ -44,7 +36,7 @@ module.exports.refreshToken = async (req, res, next) => {
         });
         const data = await AuthService.refreshSession(refreshTokenInstance);
         return res.send({ data });
-    } catch (err) {
-        next(err);
     }
-};
+}
+
+module.exports = AuthControllers;

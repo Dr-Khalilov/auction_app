@@ -1,5 +1,5 @@
 const { SIGN_IN_SCHEMA, SIGN_UP_SCHEMA } = require('../services/validations');
-const Error = require('../errors');
+const Error = require('../errors/errorHandler');
 
 module.exports.validateSignUpData = async (req, res, next) => {
     const validationResult = await SIGN_UP_SCHEMA.isValid(req.body);
