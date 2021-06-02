@@ -20,17 +20,17 @@ const User = bookshelf.model('User', {
         return this.belongsTo('Auction_Item');
     },
 
-    findAll: function (filter, options) {
+    findAll (filter, options) {
         return this.forge()
             .where(filter)
             .fetchAll(options);
     },
 
-    findOne: function (query, options) {
+    findOne (query, options) {
         return this.forge(query).fetch(options);
     },
 
-    create: function (data, options) {
+    create (data, options) {
         return this.forge(data).save(null, options);
     },
 });
