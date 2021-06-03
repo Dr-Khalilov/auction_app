@@ -20,7 +20,7 @@ module.exports.SIGN_UP_SCHEMA = yup.object().shape({
     password: yup
         .string()
         .matches(
-            /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,32}$/
+            /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,32}$/,
         )
         .required(),
     passwordConfirmation: yup
@@ -45,7 +45,7 @@ module.exports.SIGN_IN_SCHEMA = yup.object({
     password: yup
         .string()
         .matches(
-            /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,32}$/
+            /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,32}$/,
         )
         .required(),
 });

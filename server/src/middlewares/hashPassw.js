@@ -1,13 +1,10 @@
 const bcrypt = require('bcryptjs');
 
-const {
-    env: { SALT_ROUNDS },
-} = process;
-
 module.exports.hashPassword = async (req, res, next) => {
     try {
-        req.hashPassw = await bcrypt.hash(req.body.password, SALT_ROUNDS);
-        next();
+        const { body: { password_hash } } = req;
+        const hashPassword = await bcrypt.hash(password_hash, process.env.SALT_ROUNDS);
+        res.send(hashPassword);
     } catch (err) {
         next(err);
     }
