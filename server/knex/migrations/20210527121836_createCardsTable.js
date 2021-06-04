@@ -1,6 +1,6 @@
 'use strict';
-exports.up = async function (knex, Promise) {
-    return await knex.schema.createTable('cards', function (table) {
+exports.up = async function(knex, Promise) {
+    return await knex.schema.createTable('cards', function(table) {
         table.increments('id').primary();
         table
             .integer('location_id')
@@ -9,7 +9,8 @@ exports.up = async function (knex, Promise) {
             .nullable()
             .onUpdate('cascade')
             .onDelete('SET NULL');
-        table.string('name', 50).notNullable();
+        table.string('name', 100).notNullable();
+        table.string('status').notNullable();
         table.string('species').notNullable();
         table.string('type_of_person').notNullable();
         table.string('gender');
@@ -24,6 +25,6 @@ exports.up = async function (knex, Promise) {
     });
 };
 
-exports.down = async function (knex, Promise) {
+exports.down = async function(knex, Promise) {
     return await knex.schema.dropTable('cards');
 };

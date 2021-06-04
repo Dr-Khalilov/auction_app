@@ -15,6 +15,7 @@ exports.seed = async function (knex) {
                     name: instanceEpisode.name,
                     air_date: instanceEpisode.air_date,
                     episode: instanceEpisode.episode,
+                    cards: instanceEpisode.characters,
                     created_at: instanceEpisode.created,
                 };
                 addEpisodes.push(episode);
