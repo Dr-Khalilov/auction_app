@@ -1,17 +1,17 @@
 const faker = require('faker');
 const { getRandomIntInclusive, getRandomAuctionStatus } = require('../utils');
 
-exports.seed = async function (knex) {
+exports.seed = async function(knex) {
     try {
         const time = {
-            max_dur_auction: `${getRandomIntInclusive(1, 3)}:${00}:${00}`,
-            min_auction_time: `${00}:${getRandomIntInclusive(10, 20)}:${00}`,
+            max_dur_auction: `${getRandomIntInclusive(1, 3)}:${0}:${0}`,
+            min_auction_time: `${0}:${getRandomIntInclusive(10, 20)}:${0}`,
         };
 
         const generateAuctionItem = key => ({
-            user_id: getRandomIntInclusive(1, 150),
-            card_id: getRandomIntInclusive(1, 10),
-            bid_won_id: getRandomIntInclusive(1, 50),
+            user_id: getRandomIntInclusive(1, 50),
+            card_id: getRandomIntInclusive(1, 671),
+            bid_won_id: getRandomIntInclusive(141, 160),
             description: faker.lorem.words(),
             start_date: faker.date.future(),
             auction_status: getRandomAuctionStatus(),
@@ -29,7 +29,7 @@ exports.seed = async function (knex) {
                 .fill(null)
                 .map((_, i) => generateAuctionItem(i + 1));
         };
-        await knex('auction_items').insert(generateAuctionItems(10));
+        await knex('auction_items').insert(generateAuctionItems(20));
     } catch (err) {
         console.error(err);
     }

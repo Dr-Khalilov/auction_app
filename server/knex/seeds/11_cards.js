@@ -7,7 +7,6 @@ exports.seed = async function(knex) {
         const locations = await getLocation(Array.from({ length: 108 }, (v, i) => i + 1));
         const cards = await getCharacter(Array.from({ length: 671 }, (v, i) => i + 1));
 
-
         const insertAllCards = () => {
             const addCards = [];
             for (let card of cards) {
@@ -27,7 +26,6 @@ exports.seed = async function(knex) {
             }
             return addCards;
         };
-        // console.log(insertAllCards());
         await knex.batchInsert('cards', insertAllCards());
     } catch (err) {
         console.error(err);

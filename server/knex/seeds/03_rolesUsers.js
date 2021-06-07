@@ -1,5 +1,6 @@
 'use strict';
-exports.seed = async function (knex) {
+
+exports.seed = async function(knex) {
     try {
         let users = await knex
             .from('users')
@@ -20,7 +21,7 @@ exports.seed = async function (knex) {
                 .fill(null)
                 .map((_, i) => generateRoleUser(i));
         };
-        await knex('roles_users').insert(generateRolesUsers(100));
+        await knex('roles_users').insert(generateRolesUsers(50));
     } catch (err) {
         console.error(err);
     }

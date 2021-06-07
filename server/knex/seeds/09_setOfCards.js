@@ -14,7 +14,7 @@ exports.seed = async function (knex) {
                 .fill(null)
                 .map((_, i) => generateSet(i + 1));
         };
-        await knex('set_of_cards').insert(generateSets(10))
+        await knex('set_of_cards').insert(generateSets(20))
     } catch (err) {
         console.error(err);
     }

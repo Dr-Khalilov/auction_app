@@ -8,9 +8,9 @@ exports.seed = async function (knex) {
         const generateRoles = amount => {
             return new Array(amount)
                 .fill(null)
-                .map((_, i) => generateRole(i + 1));
+                .map((_, i) => generateRole(i+1));
         };
-        await knex('roles').insert(generateRoles(98));
+        await knex('roles').insert(generateRoles(1));
     } catch (err) {
         console.error(err);
     }
