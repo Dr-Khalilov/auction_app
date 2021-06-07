@@ -1,5 +1,6 @@
 const createHttpError = require('http-errors');
 const JWTService = require('../services/jwtService');
+const TokenError = require('../errors/TokenError');
 
 const checkAccessToken = async (req, res, next) => {
     try {
@@ -12,9 +13,9 @@ const checkAccessToken = async (req, res, next) => {
             console.log(req.tokenData);
             return next();
         }
-        return next(createHttpError(401, 'Need token'));
+        next(createHttpError(401, 'Need token'));
     } catch (err) {
-        next(err);
+        next(new TokenError(err));
     }
 };
 
