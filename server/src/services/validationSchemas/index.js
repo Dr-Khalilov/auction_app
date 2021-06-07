@@ -7,7 +7,7 @@ const NAME_SCHEMA = yup
 
 module.exports.SIGN_UP_SCHEMA = yup.object().shape({
     name: NAME_SCHEMA,
-    surName: NAME_SCHEMA,
+    sur_name: NAME_SCHEMA,
     login: yup
         .string()
         .required()
@@ -17,20 +17,20 @@ module.exports.SIGN_UP_SCHEMA = yup.object().shape({
         .email()
         .required()
         .min(5),
-    password: yup
+    password_hash: yup
         .string()
         .matches(
             /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,32}$/,
         )
         .required(),
-    passwordConfirmation: yup
-        .string()
-        .oneOf([yup.ref('password')])
-        .required(),
-    role: yup
-        .string()
-        .oneOf(['admin', 'user'])
-        .required(),
+    // passwordConfirmation: yup
+    //     .string()
+    //     .oneOf([yup.ref('password')])
+    //     .required(),
+    // role: yup
+    //     .string()
+    //     .oneOf(['admin', 'user'])
+    //     .required(),
 });
 
 module.exports.SIGN_IN_SCHEMA = yup.object({
