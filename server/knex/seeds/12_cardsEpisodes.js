@@ -5,7 +5,10 @@ const { getCharacter } = require('rickmortyapi');
 exports.seed = async function(knex) {
     try {
         const cards = await getCharacter(Array.from({ length: 671 }, (v, i) => i + 1));
-        const insertCardsEpisodesIds = () => {
+
+        // let episodeIds = cards.map(c => parseInt(/episode\/([\d]+)/.exec('https://rickandmortyapi.com/api/episode/1')[1]));
+
+        const insertAllCardsEpisodesIds = () => {
             const cardEpisodeIds = [];
             for (let i = 0; i < cards.length; i++) {
                 for (let j = 0; j < cards[i].episode.length; j++) {
@@ -15,11 +18,9 @@ exports.seed = async function(knex) {
                     });
                 }
             }
-            cardEpisodeIds.forEach((item, index) => console.log(item, index));
-            return cardEpisodeIds;
         };
 
-        await knex('cards_episodes').insert(insertCardsEpisodesIds());
+        await knex.batchInsert('cards_episodes', insertAllCardsEpisodesIds());
     } catch (err) {
         console.error(err);
     }
