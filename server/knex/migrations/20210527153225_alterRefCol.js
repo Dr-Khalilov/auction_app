@@ -1,5 +1,5 @@
-exports.up = async function (knex, Promise) {
-    return await knex.schema.alterTable('bids', function (table) {
+exports.up = async function(knex, Promise) {
+    return await knex.schema.alterTable('bids', function(table) {
         table
             .integer('auction_item_id')
             .unsigned()
@@ -11,6 +11,6 @@ exports.up = async function (knex, Promise) {
     });
 };
 
-exports.down = async function (knex, Promise) {
+exports.down = async function(knex, Promise) {
     return await knex.schema.dropTable('bids');
 };

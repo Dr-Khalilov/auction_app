@@ -1,6 +1,6 @@
 'use strict';
-exports.up = async function (knex, Promise) {
-    return await knex.schema.createTable('ratings', function (table) {
+exports.up = async function(knex, Promise) {
+    return await knex.schema.createTable('ratings', function(table) {
         table.increments('id').primary();
         table
             .integer('user_id')
@@ -15,6 +15,6 @@ exports.up = async function (knex, Promise) {
     });
 };
 
-exports.down = async function (knex) {
+exports.down = async function(knex) {
     return await knex.schema.dropTable('ratings');
 };

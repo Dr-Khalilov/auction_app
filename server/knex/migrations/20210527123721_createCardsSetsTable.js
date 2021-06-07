@@ -1,6 +1,6 @@
 'use strict';
-exports.up = async function (knex, Promise) {
-    return await knex.schema.createTable('cards_sets', function (table) {
+exports.up = async function(knex, Promise) {
+    return await knex.schema.createTable('cards_sets', function(table) {
         table
             .integer('card_id')
             .unsigned()
@@ -25,6 +25,6 @@ exports.up = async function (knex, Promise) {
     });
 };
 
-exports.down = async function (knex, Promise) {
+exports.down = async function(knex, Promise) {
     return await knex.schema.dropTable('cards_sets');
 };
