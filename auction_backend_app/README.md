@@ -1,0 +1,1 @@
+TO RUN THE PROJECT: npm i, npm run start-dev 
