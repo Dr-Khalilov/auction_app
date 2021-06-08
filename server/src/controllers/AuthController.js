@@ -1,7 +1,8 @@
+require('dotenv').config();
 const createHttpError = require('http-errors');
-const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const AuthService = require('../services/AuthService');
+
 const User = require('../models/User');
 const Role = require('../models/Role');
 const RefreshToken = require('../models/RefreshToken');
@@ -16,20 +17,12 @@ const generateAccessToken = (id, roles) => {
 
 class AuthControllers {
 
-    static async signUp(req, res, next) {
-        const { body: { name, sur_name, login, email, password_hash } } = req;
-        const candidate = await User.where({ email }).fetch({ require: false });
-        if (candidate) {
-            return next(createHttpError(400, 'User with email already exist'));
-        }
-        const hashPassword = bcrypt.hashSync(password_hash, process.env.SALT_ROUNDS);
-        const user = await new User({ name, sur_name, login, email, password_hash: hashPassword }).save();
-        // const userRole = await new Role({ role: user }).save();
-        if (!user) {
-            next(createHttpError(400, 'Invalid Credentials'));
-        }
-        return res.status(201).send({ data: user });
+    static async signUp(req, res) {
+        const { body } = req;
+        const user = await AuthService.registerUser(body);
+        return res.send({ data: user });
     }
+
 
     static async signIn(req, res, next) {
         const {

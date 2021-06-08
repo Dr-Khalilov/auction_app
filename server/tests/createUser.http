@@ -2,9 +2,9 @@ POST http://localhost:3000/api/auth/sign-up HTTP/1.1
 Content-Type: application/json
 
 {
-    "name": "test",
-    "sur_name": "Teovovdf",
-    "login": "Tesrtt",
-    "email": "test@example134.com",
-    "password_hash": "userala87$lla"
+    "name": "Test",
+    "sur_name": "Testovich",
+    "login": "Neo123",
+    "email": "test@example26.com",
+    "password": "Iuserala87$lla"
 }

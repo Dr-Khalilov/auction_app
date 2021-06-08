@@ -5,7 +5,7 @@ const NAME_SCHEMA = yup
     .matches(/^[A-ZА-Я][a-zа-я]{3,128}$/)
     .required();
 
-module.exports.SIGN_UP_SCHEMA = yup.object().shape({
+module.exports.SIGN_UP_SCHEMA = yup.object({
     name: NAME_SCHEMA,
     sur_name: NAME_SCHEMA,
     login: yup
@@ -17,7 +17,7 @@ module.exports.SIGN_UP_SCHEMA = yup.object().shape({
         .email()
         .required()
         .min(5),
-    password_hash: yup
+    password: yup
         .string()
         .matches(
             /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,32}$/,
