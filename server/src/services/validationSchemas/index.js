@@ -42,10 +42,5 @@ module.exports.SIGN_IN_SCHEMA = yup.object({
         .string()
         .email()
         .required(),
-    password: yup
-        .string()
-        .matches(
-            /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,32}$/,
-        )
-        .required(),
+    password: yup.string().min(5),
 });

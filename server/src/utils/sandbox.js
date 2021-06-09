@@ -1,14 +1,16 @@
 const User = require('../models/User');
 const Role = require('../models/Role');
 
-try {
-    const userRole = await User.where({ id: 4 }).fetch({
-        withRelated: ['roles'],
+async function getRoles() {
+    const userRole = await Role.where({ id: 4 }).fetch({
+        withRelated: ['users'],
         require: true,
     });
-    console.log(userRole);
-} catch (err) {
-    console.error(err);
 }
 
+const userRole = Role.where({ id: 4 }).fetch({
+    require: true,
+    withRelated: ['users'],
+}).then((id) => console.log(id));
 
+// console.log(userRole);

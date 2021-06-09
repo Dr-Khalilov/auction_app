@@ -5,7 +5,7 @@ const RefreshToken = bookshelf.model('RefreshToken', {
     hasTimestamps: true,
 
     user () {
-        return this.belongsTo('User');
+        return this.belongsTo('User','user_id');
     },
 });
 
