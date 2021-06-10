@@ -12,7 +12,6 @@ module.exports.validateSignUpData = async (req, res, next) => {
 
 module.exports.validateSignInData = async (req, res, next) => {
     const validationResult = await SIGN_IN_SCHEMA.isValid(req.body);
-    console.log(validationResult);
     if (validationResult) {
         next();
     } else {

@@ -6,7 +6,7 @@ const User = bookshelf.model('User', {
         hidden: ['password_hash'],
 
         roles() {
-            return this.belongsToMany('Role', 'roles_users','role_id');
+            return this.belongsToMany('Role', 'roles_users','user_id', 'role_id');
         },
 
         refreshTokens() {

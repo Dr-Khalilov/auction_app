@@ -13,25 +13,9 @@ class AuthControllers {
         const { body } = req;
         const user = await AuthService.loginUser(body);
         return res.send({ data: user });
-
-
-        // if (user && (await user.comparePassword(password))) {
-        //     const data = await AuthService.createSession(user);
-        //     return res.send({ data });
-        // }
-        // next(createHttpError(401, 'Invalid credentials'));
     }
 
-    static async getUsers(req, res, next) {
-        const { user } = req;
-        const users = await User.fetchAll({
-            ...user,
-        });
-        if (!users) {
-            return next(createHttpError(404, 'Users not found'));
-        }
-        res.status(200).send({ data: users });
-    }
+
 
     // static async refreshToken (req, res, next) {
     //     const {

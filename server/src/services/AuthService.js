@@ -17,7 +17,7 @@ const generateAccessToken = (id, roles) => {
     const payload = {
         id, roles,
     };
-    return jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '24h' });
+    return jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, { expiresIn: process.env.ACCESS_TOKEN_LIFE });
 };
 
 class AuthService {
@@ -29,33 +29,24 @@ class AuthService {
         }
         const salt = await bcrypt.genSalt(parseInt(process.env.SALT_ROUNDS));
         const password_hash = await bcrypt.hash(password, salt);
-        await new User({ name, sur_name, login, email, password_hash }).save();
-
-        const userObj = await User.where({ email }).fetch({ require: false });
-        const roleObj = await Role.where({ id: 2 }).fetch({ require: false });
-        const { attributes: { id } } = userObj;
-        const { attributes: { id: roleId } } = roleObj;
-        console.log(id);
-        console.log(roleId);
-        await new Role_User().save(roleId, id);
+        const user = await new User({ name, sur_name, login, email, password_hash }).save();
+        const { attributes: { id } } = user;
+        await new Role_User({ role_id: 2, user_id: id }).save();
+        return user;
     }
 
 
     static async loginUser({ email, password }) {
-        const user = await User.where({ email }).fetch({ require: false });
+        const user = await User.where({ email }).fetch({ require: false, withRelated: ['roles'] });
         if (!user) {
             throw new Error(`User with this ${email} not found`);
         }
         const { attributes: { password_hash, id } } = user;
-        console.log(id);
         const validPassword = await bcrypt.compare(password, password_hash);
-        console.log(validPassword);
         if (!validPassword) {
             throw new IncorrectPassword('Invalid Credentials');
         }
-        const userRole = Role.where({ id: id }).fetch({ withRelated: ['users'] }).then((id) => console.log(id));
-        console.log(userRole);
-        const { attributes: { role } } = userRole;
+        const [{ role }] = user.related('roles').toJSON();
         return await generateAccessToken(id, role);
     }
 
