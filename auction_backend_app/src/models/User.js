@@ -6,27 +6,27 @@ const User = bookshelf.model('User', {
         hidden: ['password_hash'],
 
         roles() {
-            return this.belongsToMany('Role','roles_users');
+            return this.belongsToMany('Role', 'roles_users','user_id', 'role_id');
         },
 
         refreshTokens() {
-            return this.hasMany('RefreshToken');
+            return this.hasMany('RefreshToken','user_id');
         },
 
         transactions() {
-            return this.hasMany('Transaction');
+            return this.hasMany('Transaction', 'user_id');
         },
 
         ratings() {
-            return this.hasMany('Rating');
+            return this.hasMany('Rating', 'user_id');
         },
 
         chats() {
-            return this.hasMany('Chat');
+            return this.hasMany('Chat', 'user_id');
         },
 
         auction_items() {
-            return this.belongsTo('Auction_Item');
+            return this.belongsTo('Auction_Item', 'user_id');
         },
     },
 );
